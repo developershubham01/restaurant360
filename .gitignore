@@ -1,0 +1,48 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Secure monorepo rules
+
+# Env & Credentials
+.env
+.env.local
+.env.*.local
+*.env
+application.properties
+application.yml
+
+# Backend Build & System
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+target/
+.mvn/
+mvnw
+mvnw.cmd
+backend/uploads/
+uploads/
+.gemini/
+brain/

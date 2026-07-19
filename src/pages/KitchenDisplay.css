@@ -1,0 +1,224 @@
+/* ===================================================================
+   KITCHEN DISPLAY SYSTEM PAGE STYLES
+   =================================================================== */
+
+.kds-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: calc(100vh - var(--topbar-height) - 48px);
+  overflow: hidden;
+}
+
+.kds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kds-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.kds-counters {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.kds-sync-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+/* Kanban Board Layout */
+.kds-kanban-board {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  overflow: hidden;
+  height: 100%;
+}
+
+.kds-column {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.column-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+}
+
+.column-header h3 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+.column-count {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.column-cards-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* KOT Order Cards */
+.kds-order-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: all var(--transition-base);
+}
+
+.kds-order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.kds-order-card.priority-urgent {
+  border-left: 4px solid var(--danger);
+  border-color: var(--danger-light);
+}
+
+.kds-order-card.delayed-warning {
+  border-color: var(--warning);
+  background: var(--warning-light);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kot-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kot-id {
+  font-size: var(--text-sm);
+  font-weight: var(--font-extrabold);
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.timer-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  color: var(--text-secondary);
+}
+
+.card-items-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+  padding: var(--space-3) 0;
+}
+
+.kot-item-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--text-sm);
+}
+
+.kot-item-qty {
+  font-weight: var(--font-bold);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.kot-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.kot-item-name {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.kot-item-notes {
+  font-size: 10px;
+  color: var(--danger-dark);
+  font-style: italic;
+  font-weight: var(--font-medium);
+  margin-top: 2px;
+}
+
+.line-ready {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.card-ready {
+  border-color: var(--success-light);
+}
+
+.card-actions {
+  display: flex;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.column-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 10px;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.column-empty-state svg {
+  margin-bottom: var(--space-2);
+}
+
+.column-empty-state p {
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+}

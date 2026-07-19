@@ -1,0 +1,288 @@
+/* ===================================================================
+   CRM PAGE STYLES
+   =================================================================== */
+
+.crm-page-container {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-5);
+  height: calc(100vh - var(--topbar-height) - 48px);
+  overflow: hidden;
+}
+
+.crm-main-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+  overflow: hidden;
+}
+
+.crm-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Stats Row */
+.crm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.crm-stat-card {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.crm-stat-card .label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  margin-bottom: 4px;
+}
+
+.crm-stat-card .val {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.text-purple {
+  color: #8B5CF6 !important;
+}
+
+.text-green {
+  color: var(--success-dark) !important;
+}
+
+/* Actions Bar */
+.crm-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crm-search {
+  width: 350px;
+}
+
+/* Table layout tweaks */
+.crm-table-container {
+  flex: 1;
+  overflow-y: auto;
+  border-radius: var(--radius);
+}
+
+.crm-row {
+  cursor: pointer;
+}
+
+.crm-row.active-row {
+  background: var(--primary-50);
+}
+
+.customer-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.customer-name-bold {
+  font-weight: var(--font-bold);
+}
+
+/* Loyalty Points & Prefix */
+.points-label-prefix {
+  font-size: 13px;
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-right: none;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.input-with-prefix {
+  border-radius: 0;
+  width: 100px;
+  border-left: none;
+  border-right: none;
+}
+
+.points-label-suffix {
+  font-size: 13px;
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-left: none;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Campaign Card Layout */
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-2);
+}
+
+.campaign-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.campaign-date {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.campaign-desc {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+  line-height: 1.5;
+}
+
+.campaign-stats {
+  display: flex;
+  gap: var(--space-5);
+  background: var(--bg-secondary);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+}
+
+.campaign-stats .label {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  font-weight: var(--font-bold);
+  display: block;
+}
+
+.campaign-stats .val {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+/* Detail Panel Right side drawer */
+.crm-detail-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.customer-details-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-4) 0;
+}
+
+.details-header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.details-header-section h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  margin-top: var(--space-2);
+}
+
+.badge-purple {
+  background: #EDE9FE;
+  color: #7C3AED;
+}
+
+.customer-contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.customer-stats-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  width: 100%;
+  text-align: center;
+}
+
+.crm-detail-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.crm-detail-stat .label {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  font-weight: var(--font-bold);
+}
+
+.crm-detail-stat .val {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+}
+
+.crm-details-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.crm-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: var(--space-6);
+}
+
+.crm-empty-state svg {
+  color: var(--border);
+  margin-bottom: var(--space-4);
+}
+
+.crm-empty-state h4 {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.crm-empty-state p {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}

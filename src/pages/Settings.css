@@ -1,0 +1,86 @@
+/* ===================================================================
+   SETTINGS PAGE STYLES
+   =================================================================== */
+
+.settings-container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-5);
+  height: calc(100vh - var(--topbar-height) - 48px);
+  overflow: hidden;
+}
+
+.settings-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) var(--space-2);
+  gap: 2px;
+  height: 100%;
+}
+
+.settings-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.settings-nav-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.settings-nav-btn.active {
+  background: var(--primary-50);
+  color: var(--primary);
+  font-weight: var(--font-bold);
+}
+
+/* Content Panel */
+.settings-content-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.settings-form .card-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Sync Settings */
+.sync-status-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sync-status-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.sync-action-btn {
+  margin-top: var(--space-3);
+  align-self: flex-start;
+}

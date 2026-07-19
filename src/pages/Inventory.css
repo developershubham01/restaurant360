@@ -1,0 +1,284 @@
+/* ===================================================================
+   INVENTORY MANAGEMENT PAGE STYLES
+   =================================================================== */
+
+.inventory-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: 4px;
+}
+
+.stock-overview-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Responsive Stats Row */
+.inventory-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
+
+.inventory-stat-card {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inventory-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.inventory-stat-card .label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inventory-stat-card .val {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.low-stock-card {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.out-stock-card {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.text-yellow-dark {
+  color: #d97706 !important;
+}
+
+/* Actions Row */
+.inventory-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.inv-search {
+  width: 320px;
+  flex-grow: 1;
+  max-width: 450px;
+}
+
+.filter-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-secondary);
+}
+
+.filter-select-wrapper select {
+  padding-left: 36px;
+  padding-right: 12px;
+  font-size: 13px;
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  height: 38px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filter-select-wrapper select:focus {
+  border-color: var(--primary);
+}
+
+/* Table layout overrides */
+.inventory-table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.data-table th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.inventory-row.row-low {
+  background: rgba(245, 158, 11, 0.03);
+}
+
+.inventory-row.row-out {
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.item-name-cell {
+  font-weight: 700;
+}
+
+.stock-level-cell {
+  font-weight: 700;
+}
+
+.stock-num {
+  font-size: var(--text-sm);
+}
+
+/* Quick Qty editor */
+.quick-qty-editor {
+  display: flex;
+  gap: 6px;
+}
+
+.quick-qty-editor .qty-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quick-qty-editor .qty-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-50);
+}
+
+.quick-qty-editor .qty-btn.edit {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.quick-qty-editor .qty-btn.edit:hover {
+  background: var(--primary-dark);
+}
+
+/* Suppliers & Waste Logs */
+.suppliers-tab-content,
+.waste-tab-content {
+  margin-top: var(--space-2);
+}
+
+/* Actions */
+.icon-action-btn.delete {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.icon-action-btn.delete:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-dark);
+}
+
+/* Modals overlays & transitions */
+.modal-overlay {
+  backdrop-filter: blur(8px) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+.modal-content {
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Mobile Responsiveness Rules */
+@media (max-width: 768px) {
+  .inventory-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .inv-search {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .filter-select-wrapper,
+  .filter-select-wrapper select {
+    width: 100% !important;
+  }
+
+  .inventory-actions-row .btn {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .inventory-stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quick-qty-editor {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .inventory-stats-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tab {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}

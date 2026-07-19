@@ -1,0 +1,21 @@
+-- V10__saas_enterprise_extensions.sql
+-- Add detailed SaaS enterprise fields to brands (restaurants) and outlets (branches)
+
+-- 1. Extend Brands
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS pan_number VARCHAR(20);
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS city VARCHAR(100);
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS state VARCHAR(100);
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS country VARCHAR(100);
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS pin_code VARCHAR(20);
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS max_users_allowed INTEGER;
+ALTER TABLE brands ADD COLUMN IF NOT EXISTS max_branches_allowed INTEGER;
+
+-- 2. Extend Outlets
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS branch_code VARCHAR(50);
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS manager_name VARCHAR(100);
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS working_hours VARCHAR(100);
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS tables_count INTEGER DEFAULT 10;
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS kitchens_count INTEGER DEFAULT 1;
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS printers_count INTEGER DEFAULT 1;
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS kds_count INTEGER DEFAULT 1;
+ALTER TABLE outlets ADD COLUMN IF NOT EXISTS tax_details VARCHAR(255);
