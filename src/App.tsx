@@ -14,7 +14,6 @@ import Login from './pages/Login';
 import AIChatbot from './pages/AIChatbot';
 import SuperAdmin from './pages/SuperAdmin';
 import SuperAdminLayout from './pages/SuperAdminLayout';
-import Portfolio from './pages/Portfolio';
 import { useAuthStore } from './store/authStore';
 import api from './services/api';
 import React from 'react';
@@ -70,10 +69,6 @@ export default function App() {
     }
   }, [isAuthenticated, user, location.pathname, navigate]);
 
-  if (location.pathname === '/portfolio') {
-    return <Portfolio />;
-  }
-
   if (!isAuthenticated) {
     return <Login />;
   }
@@ -103,7 +98,6 @@ export default function App() {
             <Route path="/ai-chatbot" element={<AIChatbot />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/super-admin" element={<SuperAdmin />} />
-            <Route path="/portfolio" element={<Portfolio />} />
           </Routes>
         </main>
       </div>
