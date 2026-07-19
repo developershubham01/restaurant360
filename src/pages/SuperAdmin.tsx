@@ -851,7 +851,7 @@ export default function SuperAdmin({ activeTab = 'restaurants_branches' }: Super
                                 onClick={async () => {
                                   try {
                                     const response = await api.get(doc.url, { responseType: 'blob' });
-                                    const blob = new Blob([response.data], { type: response.headers['content-type'] });
+                                    const blob = new Blob([response.data], { type: (response.headers['content-type'] as string) || 'application/pdf' });
                                     const url = window.URL.createObjectURL(blob);
                                     const link = document.createElement('a');
                                     link.href = url;
@@ -1376,7 +1376,7 @@ export default function SuperAdmin({ activeTab = 'restaurants_branches' }: Super
                           <button
                             className="btn btn-outline btn-xs text-red-500"
                             onClick={() => handleDeleteCompanyMember(m.id)}
-                            disabled={currentUser && currentUser.username === m.username}
+                            disabled={!!(currentUser && currentUser.username === m.username)}
                           >
                             Delete
                           </button>

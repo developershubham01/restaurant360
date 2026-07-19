@@ -6,6 +6,8 @@ interface User {
   roles: string[];
   permissions: string[];
   fullName?: string;
+  email?: string;
+  phone?: string;
 }
 
 interface AuthState {

@@ -235,9 +235,8 @@ export default function SuperAdminLayout() {
     fetchStats();
   }, [activeTab]);
 
-  // Load live SaaS audit logs
   useEffect(() => {
-    if (activeTab === 'logs') {
+    if (activeTab === 'support_ops') {
       const fetchLogs = async () => {
         try {
           const res = await api.get('/api/saas/logs');
@@ -676,7 +675,7 @@ export default function SuperAdminLayout() {
               <div className="section-card">
                 <div className="section-title-bar">
                   <h3>Connected Tenants Health Check</h3>
-                  <button className="super-action-btn" onClick={() => setActiveTab('tenants')}>
+                  <button className="super-action-btn" onClick={() => setActiveTab('restaurants_branches')}>
                     <span>Manage Tenants</span>
                     <ArrowUpRight size={14} />
                   </button>
