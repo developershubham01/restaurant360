@@ -95,31 +95,67 @@ export default function Login() {
   const filteredOutlets = outlets.filter(o => o.brand?.id === Number(selectedBrandId));
 
   return (
-    <div className="login-window login-theme-light" style={{ display: 'flex', flexDirection: 'row', height: '100vh', width: '100vw', overflow: 'hidden' }}>
-      {/* Left Side Branding - Now spans 100vh */}
-      <aside className="login-left-branding" style={{ height: '100vh', boxSizing: 'border-box', justifyContent: 'center' }}>
-        <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ maxWidth: '260px', marginBottom: '12px', objectFit: 'contain' }} />
-        <p className="logo-tagline-text" style={{ paddingLeft: '4px' }}>
-          Enterprise Management &amp; Billing
-        </p>
-      </aside>
+    <div className="login-window login-theme-light">
+      {/* Header */}
+      <header className="login-top-bar">
+        <div className="login-top-bar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '24px', objectFit: 'contain' }} />
+          <span className="portal-sub-tag">Desktop POS Portal</span>
+        </div>
+        <div className="login-top-bar-right">
+          <p className="demo-ref-label">Resto360 Cloud ERP Node</p>
+          <p className="demo-ref-no">Status: Connected to Database Cluster</p>
+        </div>
+      </header>
 
-      {/* Right Side Column containing Header, Body Content, and Footer */}
-      <div className="login-main-wrapper" style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100vh', overflow: 'hidden' }}>
-        {/* Header */}
-        <header className="login-top-bar" style={{ flexShrink: 0 }}>
-          <div className="login-top-bar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '24px', objectFit: 'contain' }} />
-            <span className="portal-sub-tag">Desktop POS Portal</span>
+      {/* Main Content */}
+      <main className="login-body">
+        {/* Left Side Branding */}
+        <aside className="login-left-branding" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+          {/* Glassmorphic Brand Card inside the sidebar */}
+          <div className="brand-info-card" style={{
+            background: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(254, 215, 170, 0.15)',
+            borderRadius: '16px',
+            padding: '28px',
+            maxWidth: '320px',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'
+          }}>
+            <div style={{ backgroundColor: '#ffffff', padding: '12px 20px', borderRadius: '8px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+              <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ maxWidth: '200px', objectFit: 'contain', display: 'block' }} />
+            </div>
+            
+            <h3 style={{ color: '#ea580c', fontSize: '18px', fontWeight: 700, margin: '8px 0 4px 0', letterSpacing: '0.025em' }}>
+              Restaurant360 ERP
+            </h3>
+            <p style={{ color: '#fed7aa', fontSize: '13px', fontWeight: 500, marginBottom: '20px', lineHeight: '1.4' }}>
+              Next-Gen Multi-Tenant POS &amp; Dining Ecosystem
+            </p>
+
+            <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '12px', color: '#e2e8f0' }}>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ color: '#ea580c' }}>⚡</span> Zero-Latency Billing POS
+              </li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ color: '#ea580c' }}>🍳</span> Live Kitchen Display (KDS)
+              </li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ color: '#ea580c' }}>📦</span> Recipe-Linked Stock Inventory
+              </li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ color: '#ea580c' }}>📊</span> Corporate ERP Super Admin Panel
+              </li>
+            </ul>
           </div>
-          <div className="login-top-bar-right">
-            <p className="demo-ref-label">Resto360 Cloud ERP Node</p>
-            <p className="demo-ref-no">Status: Connected to Database Cluster</p>
-          </div>
-        </header>
+        </aside>
 
         {/* Center Auth Panel */}
-        <section className="login-right-section" style={{ flex: 1, overflowY: 'auto' }}>
+        <section className="login-right-section">
           
           {portalType === 'select' ? (
             <div className="login-card select-portal-card animate-fade-in">
@@ -153,69 +189,70 @@ export default function Login() {
             </div>
           ) : (
             <div className="login-card form-login-card animate-fade-in">
-              
-              {/* Back to selector */}
-              <button
-                onClick={() => {
-                  setPortalType('select');
-                  setErrorMsg(null);
-                }}
-                className="back-portal-btn"
-              >
-                <ArrowLeft size={14} /> Back to Portal Selection
-              </button>
+              <div className="login-card-header">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPortalType('select');
+                    setErrorMsg(null);
+                  }}
+                  className="back-to-portal-btn"
+                >
+                  <ArrowLeft size={16} /> Back to Portals
+                </button>
+              </div>
 
               <h2 className="login-form-title">
-                {portalType === 'company' ? 'Corporate Super Admin Sign In' : 'Restaurant Branch Portal'}
+                {portalType === 'company' ? 'Corporate ERP' : 'Restaurant POS'}
               </h2>
-
-              {/* Brand and Outlet Dropdown Pickers */}
-              {portalType === 'branch' && (
-                <div className="branch-dropdown-wrapper">
-                  <div className="dropdown-input-group">
-                    <label className="dropdown-input-label">Brand / Chain</label>
-                    <select
-                      value={selectedBrandId}
-                      onChange={(e) => {
-                        setSelectedBrandId(e.target.value ? Number(e.target.value) : '');
-                        setSelectedOutletId('');
-                      }}
-                      className="login-dropdown custom-select"
-                    >
-                      <option value="">Select Chain</option>
-                      {brands.map(b => (
-                        <option key={b.id} value={b.id}>{b.name}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="dropdown-input-group">
-                    <label className="dropdown-input-label">Branch Outlet</label>
-                    <select
-                      value={selectedOutletId}
-                      onChange={(e) => setSelectedOutletId(e.target.value ? Number(e.target.value) : '')}
-                      disabled={!selectedBrandId}
-                      className="login-dropdown custom-select"
-                    >
-                      <option value="">Select Branch</option>
-                      {filteredOutlets.map(o => (
-                        <option key={o.id} value={o.id}>{o.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )}
-
-
+              <p className="login-form-subtitle">Enter credentials to authenticate into system node</p>
 
               {errorMsg && (
-                <div className="login-error-alert">
-                  <AlertCircle className="alert-icon" size={16} />
+                <div className="login-error-alert animate-fade-in">
+                  <AlertCircle size={16} />
                   <span>{errorMsg}</span>
                 </div>
               )}
 
               <form onSubmit={handleLoginSubmit} className="login-form-fields">
+                {portalType === 'branch' && (
+                  <>
+                    <div className="form-group-field">
+                      <label className="form-input-label">Select Brand</label>
+                      <select
+                        value={selectedBrandId}
+                        onChange={(e) => {
+                          setSelectedBrandId(e.target.value ? Number(e.target.value) : '');
+                          setSelectedOutletId('');
+                        }}
+                        className="form-input-select"
+                        required
+                      >
+                        <option value="">Choose active Brand</option>
+                        {brands.map((b) => (
+                          <option key={b.id} value={b.id}>{b.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="form-group-field">
+                      <label className="form-input-label">Select Outlet</label>
+                      <select
+                        value={selectedOutletId}
+                        onChange={(e) => setSelectedOutletId(e.target.value ? Number(e.target.value) : '')}
+                        className="form-input-select"
+                        required
+                        disabled={!selectedBrandId}
+                      >
+                        <option value="">Choose active Outlet</option>
+                        {filteredOutlets.map((o) => (
+                          <option key={o.id} value={o.id}>{o.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </>
+                )}
+
                 <div className="form-field-group">
                   <label className="form-field-label">Username / Email</label>
                   <div className="form-input-relative">
@@ -272,24 +309,24 @@ export default function Login() {
           )}
 
         </section>
+      </main>
 
-        {/* Footer */}
-        <footer className="login-footer-section" style={{ flexShrink: 0 }}>
-          <div className="login-footer-left">
-            <p>
-              Need Quick Help? <span className="support-phone"><Phone size={12} /> 0885858585</span>
-            </p>
-            <p>
-              Contact for Support <span className="support-email"><Mail size={12} /> support@resto360.com</span>
-            </p>
-          </div>
-          <div className="login-footer-right">
-            <p className="windows-act-msg">Enterprise SaaS License Active</p>
-            <p className="windows-act-sub">Host Server: localhost:8080</p>
-            <p className="portal-version-label">Version : 1.07.0.1</p>
-          </div>
-        </footer>
-      </div>
+      {/* Footer */}
+      <footer className="login-footer-section">
+        <div className="login-footer-left">
+          <p>
+            Need Quick Help? <span className="support-phone"><Phone size={12} /> 0885858585</span>
+          </p>
+          <p>
+            Contact for Support <span className="support-email"><Mail size={12} /> support@resto360.com</span>
+          </p>
+        </div>
+        <div className="login-footer-right">
+          <p className="windows-act-msg">Enterprise SaaS License Active</p>
+          <p className="windows-act-sub">Host Server: localhost:8080</p>
+          <p className="portal-version-label">Version : 1.07.0.1</p>
+        </div>
+      </footer>
     </div>
   );
 }
