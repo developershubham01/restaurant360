@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { User, Lock, Phone, Mail, AlertCircle, Loader, Building2, Store, ArrowLeft } from 'lucide-react';
 import api from '../services/api';
 import { useAuthStore } from '../store/authStore';
@@ -8,11 +8,7 @@ export default function Login() {
   const setLoginData = useAuthStore((state) => state.setLoginData);
   const [portalType, setPortalType] = useState<'select' | 'company' | 'branch'>('select');
   
-  // Dynamic portal metadata
-  const [brands, setBrands] = useState<any[]>([]);
-  const [outlets, setOutlets] = useState<any[]>([]);
-  const [selectedBrandId, setSelectedBrandId] = useState<number | ''>('');
-  const [selectedOutletId, setSelectedOutletId] = useState<number | ''>('');
+
 
   // Password state
   const [username, setUsername] = useState('');
@@ -22,33 +18,14 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Load brands and outlets dynamically on mount
-  useEffect(() => {
-    const loadPortalMetadata = async () => {
-      try {
-        const [brandRes, outletRes] = await Promise.all([
-          api.get('/api/brands'),
-          api.get('/api/outlets')
-        ]);
-        if (brandRes.data?.success) setBrands(brandRes.data.data);
-        if (outletRes.data?.success) setOutlets(outletRes.data.data);
-      } catch (err) {
-        console.error('Failed to load login portal data:', err);
-      }
-    };
-    loadPortalMetadata();
-  }, []);
+
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
     setIsLoading(true);
 
-    if (portalType === 'branch' && !selectedOutletId) {
-      setErrorMsg('Please select a restaurant chain brand and outlet branch first.');
-      setIsLoading(false);
-      return;
-    }
+
 
     let authUser = username;
     let authPass = password;
@@ -61,8 +38,8 @@ export default function Login() {
 
       if (response.data && response.data.success) {
         setLoginData(response.data.data);
-        if (portalType === 'branch' && selectedOutletId) {
-          useAuthStore.getState().setOutletId(Number(selectedOutletId));
+        if (portalType === 'branch') {
+          useAuthStore.getState().setOutletId(1);
         }
       } else {
         setErrorMsg(response.data?.message || 'Login failed. Please try again.');
@@ -81,18 +58,7 @@ export default function Login() {
     }
   };
 
-  const handleQuickLogin = (acc: { label: string; user: string; type: 'company' | 'branch' }) => {
-    setPortalType(acc.type);
-    setErrorMsg(null);
-    setUsername(acc.user);
-    setPassword('password');
-    if (acc.type === 'branch') {
-      setSelectedBrandId(1);
-      setSelectedOutletId(1);
-    }
-  };
 
-  const filteredOutlets = outlets.filter(o => o.brand?.id === Number(selectedBrandId));
 
   return (
     <div className="login-window login-theme-light">
@@ -103,8 +69,8 @@ export default function Login() {
           <span className="portal-sub-tag">Desktop POS Portal</span>
         </div>
         <div className="login-top-bar-right">
-          <p className="demo-ref-label">Resto360 Cloud ERP Node</p>
-          <p className="demo-ref-no">Status: Connected to Database Cluster</p>
+          <p className="demo-ref-label">Restaurant360 Cloud ERP</p>
+          
         </div>
       </header>
 
@@ -215,43 +181,7 @@ export default function Login() {
               )}
 
               <form onSubmit={handleLoginSubmit} className="login-form-fields">
-                {portalType === 'branch' && (
-                  <>
-                    <div className="form-group-field">
-                      <label className="form-input-label">Select Brand</label>
-                      <select
-                        value={selectedBrandId}
-                        onChange={(e) => {
-                          setSelectedBrandId(e.target.value ? Number(e.target.value) : '');
-                          setSelectedOutletId('');
-                        }}
-                        className="form-input-select"
-                        required
-                      >
-                        <option value="">Choose active Brand</option>
-                        {brands.map((b) => (
-                          <option key={b.id} value={b.id}>{b.name}</option>
-                        ))}
-                      </select>
-                    </div>
 
-                    <div className="form-group-field">
-                      <label className="form-input-label">Select Outlet</label>
-                      <select
-                        value={selectedOutletId}
-                        onChange={(e) => setSelectedOutletId(e.target.value ? Number(e.target.value) : '')}
-                        className="form-input-select"
-                        required
-                        disabled={!selectedBrandId}
-                      >
-                        <option value="">Choose active Outlet</option>
-                        {filteredOutlets.map((o) => (
-                          <option key={o.id} value={o.id}>{o.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </>
-                )}
 
                 <div className="form-field-group">
                   <label className="form-field-label">Username / Email</label>
@@ -315,16 +245,15 @@ export default function Login() {
       <footer className="login-footer-section">
         <div className="login-footer-left">
           <p>
-            Need Quick Help? <span className="support-phone"><Phone size={12} /> 0885858585</span>
+            Need Quick Help? <span className="support-phone"><Phone size={12} /> 99303 38504</span>
           </p>
           <p>
-            Contact for Support <span className="support-email"><Mail size={12} /> support@resto360.com</span>
+            Contact for Support <span className="support-email"><Mail size={12} /> info@abwcurious.com</span>
           </p>
         </div>
         <div className="login-footer-right">
-          <p className="windows-act-msg">Enterprise SaaS License Active</p>
-          <p className="windows-act-sub">Host Server: localhost:8080</p>
-          <p className="portal-version-label">Version : 1.07.0.1</p>
+          <p className="windows-act-msg">Enterprise SaaS</p>
+          <p className="portal-version-label">Version : 1.20.26</p>
         </div>
       </footer>
     </div>
