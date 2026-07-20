@@ -7,7 +7,6 @@ import './Login.css';
 export default function Login() {
   const setLoginData = useAuthStore((state) => state.setLoginData);
   const [portalType, setPortalType] = useState<'select' | 'company' | 'branch'>('select');
-  const [loginMethod, setLoginMethod] = useState<'password' | 'passcode'>('password');
   
   // Dynamic portal metadata
   const [brands, setBrands] = useState<any[]>([]);
@@ -19,20 +18,9 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-  // Passcode state
-  const [passcode, setPasscode] = useState(['', '', '', '']);
-  
   // Loading & Error states
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  // References for passcode inputs
-  const inputRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null)
-  ];
 
   // Load brands and outlets dynamically on mount
   useEffect(() => {
@@ -51,33 +39,6 @@ export default function Login() {
     loadPortalMetadata();
   }, []);
 
-  // Auto-focus first pin field when switching to passcode mode
-  useEffect(() => {
-    if (loginMethod === 'passcode' && portalType === 'branch') {
-      inputRefs[0].current?.focus();
-    }
-  }, [loginMethod, portalType]);
-
-  const handlePasscodeChange = (index: number, value: string) => {
-    if (value && !/^\d$/.test(value)) return;
-    const newPasscode = [...passcode];
-    newPasscode[index] = value;
-    setPasscode(newPasscode);
-
-    if (value !== '' && index < 3) {
-      inputRefs[index + 1].current?.focus();
-    }
-  };
-
-  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && !passcode[index] && index > 0) {
-      const newPasscode = [...passcode];
-      newPasscode[index - 1] = '';
-      setPasscode(newPasscode);
-      inputRefs[index - 1].current?.focus();
-    }
-  };
-
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
@@ -91,26 +52,6 @@ export default function Login() {
 
     let authUser = username;
     let authPass = password;
-
-    if (loginMethod === 'passcode') {
-      const enteredPin = passcode.join('');
-      if (enteredPin.length !== 4) {
-        setErrorMsg('Please enter a complete 4-digit passcode.');
-        setIsLoading(false);
-        return;
-      }
-      
-      if (enteredPin === '1234') {
-        authUser = 'cashier1';
-        authPass = 'password';
-      } else if (enteredPin === '0000') {
-        authUser = 'admin';
-        authPass = 'password';
-      } else {
-        authUser = 'cashier1';
-        authPass = 'password';
-      }
-    }
 
     try {
       const response = await api.post('/api/auth/login', {
@@ -145,7 +86,6 @@ export default function Login() {
     setErrorMsg(null);
     setUsername(acc.user);
     setPassword('password');
-    setLoginMethod('password');
     if (acc.type === 'branch') {
       setSelectedBrandId(1);
       setSelectedOutletId(1);
@@ -266,29 +206,7 @@ export default function Login() {
                 </div>
               )}
 
-              {/* Auth Method Tabs */}
-              <div className="login-auth-tabs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setErrorMsg(null);
-                    setLoginMethod('password');
-                  }}
-                  className={`login-tab-trigger ${loginMethod === 'password' ? 'active' : ''}`}
-                >
-                  Password Login
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setErrorMsg(null);
-                    setLoginMethod('passcode');
-                  }}
-                  className={`login-tab-trigger ${loginMethod === 'passcode' ? 'active' : ''}`}
-                >
-                  Quick PIN
-                </button>
-              </div>
+
 
               {errorMsg && (
                 <div className="login-error-alert">
@@ -298,69 +216,41 @@ export default function Login() {
               )}
 
               <form onSubmit={handleLoginSubmit} className="login-form-fields">
-                {loginMethod === 'password' ? (
-                  <>
-                    <div className="form-field-group">
-                      <label className="form-field-label">Username / Email</label>
-                      <div className="form-input-relative">
-                        <span className="form-input-icon">
-                          <User size={18} />
-                        </span>
-                        <input
-                          type="text"
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          className="login-input-field"
-                          placeholder="Enter username"
-                          required
-                          disabled={isLoading}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-field-group">
-                      <label className="form-field-label">Password</label>
-                      <div className="form-input-relative">
-                        <span className="form-input-icon">
-                          <Lock size={18} />
-                        </span>
-                        <input
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          className="login-input-field"
-                          placeholder="••••••••"
-                          required
-                          disabled={isLoading}
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="pin-input-container">
-                    <label className="pin-input-label">Enter your 4-Digit Passcode</label>
-                    <div className="pin-inputs-row">
-                      {passcode.map((digit, index) => (
-                        <input
-                          key={index}
-                          ref={inputRefs[index]}
-                          id={`pin-${index}`}
-                          type="password"
-                          inputMode="numeric"
-                          maxLength={1}
-                          value={digit}
-                          onChange={(e) => handlePasscodeChange(index, e.target.value)}
-                          onKeyDown={(e) => handleKeyDown(index, e)}
-                          className="pin-digit-input"
-                          disabled={isLoading}
-                        />
-                      ))}
-                    </div>
-                    <p className="pin-info-helper">
-                      Default Passcodes: <span className="pin-highlight">1234</span> (Cashier) or <span className="pin-highlight">0000</span> (Admin)
-                    </p>
+                <div className="form-field-group">
+                  <label className="form-field-label">Username / Email</label>
+                  <div className="form-input-relative">
+                    <span className="form-input-icon">
+                      <User size={18} />
+                    </span>
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className="login-input-field"
+                      placeholder="Enter username"
+                      required
+                      disabled={isLoading}
+                    />
                   </div>
-                )}
+                </div>
+
+                <div className="form-field-group">
+                  <label className="form-field-label">Password</label>
+                  <div className="form-input-relative">
+                    <span className="form-input-icon">
+                      <Lock size={18} />
+                    </span>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="login-input-field"
+                      placeholder="••••••••"
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
 
                 <button
                   type="submit"
