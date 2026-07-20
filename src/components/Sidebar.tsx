@@ -73,15 +73,13 @@ export default function Sidebar() {
   return (
     <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
       {/* Logo */}
-      <div className="sidebar-logo">
-        <div className="sidebar-logo-icon">
-          <Utensils size={22} />
-        </div>
-        {!collapsed && (
-          <div className="sidebar-logo-text">
-            <span className="logo-restaurant">Resto</span>
-            <span className="logo-360">360</span>
+      <div className="sidebar-logo" style={{ display: 'flex', alignItems: 'center', height: '60px', padding: '0 16px' }}>
+        {collapsed ? (
+          <div className="sidebar-logo-icon" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 auto' }}>
+            <Utensils size={22} />
           </div>
+        ) : (
+          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
         )}
       </div>
 

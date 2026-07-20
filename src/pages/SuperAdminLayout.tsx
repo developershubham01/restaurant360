@@ -312,14 +312,9 @@ export default function SuperAdminLayout() {
     <div className="super-portal">
       {/* Decoupled Super Admin Sidebar */}
       <aside className="super-sidebar" style={{ width: '270px', overflowY: 'auto' }}>
-        <div className="super-sidebar-brand">
-          <div className="super-sidebar-logo">
-            <Server size={20} />
-          </div>
-          <div className="super-sidebar-title">
-            <span className="super-brand-main">Resto360</span>
-            <span className="super-brand-sub">Corporate Cloud ERP</span>
-          </div>
+        <div className="super-sidebar-brand" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '16px', gap: '4px' }}>
+          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
+          <span className="super-brand-sub" style={{ fontSize: '11px', color: 'var(--text-secondary)', paddingLeft: '4px', letterSpacing: '0.05em' }}>Corporate Cloud ERP</span>
         </div>
 
         <nav className="super-sidebar-menu">

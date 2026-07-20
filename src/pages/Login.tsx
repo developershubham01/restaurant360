@@ -158,8 +158,8 @@ export default function Login() {
     <div className="login-window login-theme-light">
       {/* Header */}
       <header className="login-top-bar">
-        <div className="login-top-bar-left">
-          <div className="logo-badge-orange">R360</div>
+        <div className="login-top-bar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '24px', objectFit: 'contain' }} />
           <span className="portal-sub-tag">Desktop POS Portal</span>
         </div>
         <div className="login-top-bar-right">
@@ -172,10 +172,8 @@ export default function Login() {
       <main className="login-body">
         {/* Left Side Branding */}
         <aside className="login-left-branding">
-          <h1 className="logo-text-title">
-            resto<span className="logo-text-highlight">360</span>
-          </h1>
-          <p className="logo-tagline-text">
+          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ maxWidth: '260px', marginBottom: '12px', objectFit: 'contain' }} />
+          <p className="logo-tagline-text" style={{ paddingLeft: '4px' }}>
             Enterprise Management &amp; Billing
           </p>
         </aside>
