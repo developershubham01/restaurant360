@@ -155,31 +155,31 @@ export default function Login() {
   const filteredOutlets = outlets.filter(o => o.brand?.id === Number(selectedBrandId));
 
   return (
-    <div className="login-window login-theme-light">
-      {/* Header */}
-      <header className="login-top-bar">
-        <div className="login-top-bar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '24px', objectFit: 'contain' }} />
-          <span className="portal-sub-tag">Desktop POS Portal</span>
-        </div>
-        <div className="login-top-bar-right">
-          <p className="demo-ref-label">Resto360 Cloud ERP Node</p>
-          <p className="demo-ref-no">Status: Connected to Database Cluster</p>
-        </div>
-      </header>
+    <div className="login-window login-theme-light" style={{ display: 'flex', flexDirection: 'row', height: '100vh', width: '100vw', overflow: 'hidden' }}>
+      {/* Left Side Branding - Now spans 100vh */}
+      <aside className="login-left-branding" style={{ height: '100vh', boxSizing: 'border-box', justifyContent: 'center' }}>
+        <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ maxWidth: '260px', marginBottom: '12px', objectFit: 'contain' }} />
+        <p className="logo-tagline-text" style={{ paddingLeft: '4px' }}>
+          Enterprise Management &amp; Billing
+        </p>
+      </aside>
 
-      {/* Main Content */}
-      <main className="login-body">
-        {/* Left Side Branding */}
-        <aside className="login-left-branding">
-          <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ maxWidth: '260px', marginBottom: '12px', objectFit: 'contain' }} />
-          <p className="logo-tagline-text" style={{ paddingLeft: '4px' }}>
-            Enterprise Management &amp; Billing
-          </p>
-        </aside>
+      {/* Right Side Column containing Header, Body Content, and Footer */}
+      <div className="login-main-wrapper" style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100vh', overflow: 'hidden' }}>
+        {/* Header */}
+        <header className="login-top-bar" style={{ flexShrink: 0 }}>
+          <div className="login-top-bar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img src="/src/assets/logo.png" alt="Restaurant360 Logo" style={{ height: '24px', objectFit: 'contain' }} />
+            <span className="portal-sub-tag">Desktop POS Portal</span>
+          </div>
+          <div className="login-top-bar-right">
+            <p className="demo-ref-label">Resto360 Cloud ERP Node</p>
+            <p className="demo-ref-no">Status: Connected to Database Cluster</p>
+          </div>
+        </header>
 
         {/* Center Auth Panel */}
-        <section className="login-right-section">
+        <section className="login-right-section" style={{ flex: 1, overflowY: 'auto' }}>
           
           {portalType === 'select' ? (
             <div className="login-card select-portal-card animate-fade-in">
@@ -423,24 +423,24 @@ export default function Login() {
           )}
 
         </section>
-      </main>
 
-      {/* Footer */}
-      <footer className="login-footer-section">
-        <div className="login-footer-left">
-          <p>
-            Need Quick Help? <span className="support-phone"><Phone size={12} /> 0885858585</span>
-          </p>
-          <p>
-            Contact for Support <span className="support-email"><Mail size={12} /> support@resto360.com</span>
-          </p>
-        </div>
-        <div className="login-footer-right">
-          <p className="windows-act-msg">Enterprise SaaS License Active</p>
-          <p className="windows-act-sub">Host Server: localhost:8080</p>
-          <p className="portal-version-label">Version : 1.07.0.1</p>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="login-footer-section" style={{ flexShrink: 0 }}>
+          <div className="login-footer-left">
+            <p>
+              Need Quick Help? <span className="support-phone"><Phone size={12} /> 0885858585</span>
+            </p>
+            <p>
+              Contact for Support <span className="support-email"><Mail size={12} /> support@resto360.com</span>
+            </p>
+          </div>
+          <div className="login-footer-right">
+            <p className="windows-act-msg">Enterprise SaaS License Active</p>
+            <p className="windows-act-sub">Host Server: localhost:8080</p>
+            <p className="portal-version-label">Version : 1.07.0.1</p>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
