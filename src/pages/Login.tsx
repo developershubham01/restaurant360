@@ -210,26 +210,6 @@ export default function Login() {
                 </button>
               </div>
 
-              {/* Quick developer bypass */}
-              <div className="dev-bypass-strip">
-                <p className="dev-bypass-title">Quick Bypass for Developers</p>
-                <div className="dev-bypass-buttons">
-                  {[
-                    { label: 'Admin', user: 'admin', type: 'company' as const },
-                    { label: 'Owner', user: 'owner', type: 'company' as const },
-                    { label: 'Cashier', user: 'cashier1', type: 'branch' as const },
-                    { label: 'Chef', user: 'chef1', type: 'branch' as const }
-                  ].map((acc) => (
-                    <button
-                      key={acc.user}
-                      onClick={() => handleQuickLogin(acc)}
-                      className="dev-bypass-btn"
-                    >
-                      {acc.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           ) : (
             <div className="login-card form-login-card animate-fade-in">
@@ -398,27 +378,6 @@ export default function Login() {
                 </button>
               </form>
 
-              {/* Compact Quick Test Logins */}
-              <div className="quick-test-logins-section">
-                <p className="quick-test-title">Quick Sign-in for Testing</p>
-                <div className="quick-test-badge-row">
-                  {[
-                    { label: 'Admin', user: 'admin', type: 'company' as const, title: 'admin-btn' },
-                    { label: 'Owner', user: 'owner', type: 'company' as const, title: 'owner-btn' },
-                    { label: 'Cashier', user: 'cashier1', type: 'branch' as const, title: 'cashier-btn' },
-                    { label: 'Chef', user: 'chef1', type: 'branch' as const, title: 'chef-btn' }
-                  ].map((acc) => (
-                    <button
-                      key={acc.user}
-                      type="button"
-                      onClick={() => handleQuickLogin(acc)}
-                      className={`quick-login-badge-btn ${acc.title}`}
-                    >
-                      {acc.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           )}
 
