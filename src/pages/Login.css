@@ -74,7 +74,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ea580c 0%, #ffedd5 100%);
+  background-image: url('../assets/login_bg.png');
+  background-size: cover;
+  background-position: center;
   padding: 32px;
   border-right: 1px solid #fed7aa;
   position: relative;
