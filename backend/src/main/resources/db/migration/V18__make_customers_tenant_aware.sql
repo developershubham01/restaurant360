@@ -265,3 +265,12 @@ CREATE POLICY brands_rls ON brands FOR ALL USING (
     current_setting('app.bypass_rls', true) = 'true' 
     OR id = NULLIF(current_setting('app.current_tenant_id', true), '')::bigint
 );
+
+-- 7. Disable RLS on global metadata and configuration tables to prevent default-deny behavior for non-superuser connections
+ALTER TABLE roles DISABLE ROW LEVEL SECURITY;
+ALTER TABLE user_roles DISABLE ROW LEVEL SECURITY;
+ALTER TABLE permissions DISABLE ROW LEVEL SECURITY;
+ALTER TABLE role_permissions DISABLE ROW LEVEL SECURITY;
+ALTER TABLE subscription_plans DISABLE ROW LEVEL SECURITY;
+ALTER TABLE coupons DISABLE ROW LEVEL SECURITY;
+ALTER TABLE flyway_schema_history DISABLE ROW LEVEL SECURITY;
