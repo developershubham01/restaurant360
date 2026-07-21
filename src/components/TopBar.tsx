@@ -176,10 +176,21 @@ export default function TopBar({ title, subtitle }: TopBarProps) {
 
         {/* Branch Selector */}
         <div className="topbar-branch-wrapper" style={{ position: 'relative' }}>
-          <button className="topbar-branch-btn" onClick={() => setBranchDropdownOpen(!branchDropdownOpen)}>
+          <button 
+            className="topbar-branch-btn" 
+            onClick={() => {
+              const isOwnerOrAdmin = user?.roles?.some((r: string) => r === 'OWNER' || r === 'ADMIN');
+              if (isOwnerOrAdmin) {
+                setBranchDropdownOpen(!branchDropdownOpen);
+              }
+            }}
+            style={{ 
+              cursor: user?.roles?.some((r: string) => r === 'OWNER' || r === 'ADMIN') ? 'pointer' : 'default' 
+            }}
+          >
             <Store size={16} />
             <span>{activeOutlet.name}</span>
-            <ChevronDown size={14} />
+            {user?.roles?.some((r: string) => r === 'OWNER' || r === 'ADMIN') && <ChevronDown size={14} />}
           </button>
 
           {branchDropdownOpen && (

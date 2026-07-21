@@ -61,7 +61,17 @@ export default function Login() {
       if (response.data && response.data.success) {
         setLoginData(response.data.data);
         if (portalType === 'branch') {
-          useAuthStore.getState().setOutletId(1);
+          try {
+            const outletsRes = await api.get('/api/outlets');
+            if (outletsRes.data && outletsRes.data.success && outletsRes.data.data.length > 0) {
+              useAuthStore.getState().setOutletId(outletsRes.data.data[0].id);
+            } else {
+              useAuthStore.getState().setOutletId(1);
+            }
+          } catch (err) {
+            console.error('Failed to auto-resolve outlet on login:', err);
+            useAuthStore.getState().setOutletId(1);
+          }
         }
       } else {
         setErrorMsg(response.data?.message || 'Login failed. Please try again.');
