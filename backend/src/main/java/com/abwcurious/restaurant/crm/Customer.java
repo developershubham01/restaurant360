@@ -22,7 +22,7 @@ public class Customer {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = false, length = 20)
     private String phone;
 
     @Column(length = 100)
@@ -36,6 +36,9 @@ public class Customer {
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(name = "tenant_id", nullable = false)
+    private Long tenantId;
+
     @PrePersist
     protected void onCreate() {
         if (uuid == null) {
@@ -43,6 +46,12 @@ public class Customer {
         }
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
+        }
+        if (tenantId == null) {
+            tenantId = com.abwcurious.restaurant.tenant.TenantContext.getCurrentTenant();
+            if (tenantId == null) {
+                tenantId = 1L; // Fallback default tenant
+            }
         }
     }
 }
