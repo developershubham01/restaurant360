@@ -179,18 +179,18 @@ export default function TopBar({ title, subtitle }: TopBarProps) {
           <button 
             className="topbar-branch-btn" 
             onClick={() => {
-              const isOwnerOrAdmin = user?.roles?.some((r: string) => r === 'OWNER' || r === 'ADMIN');
-              if (isOwnerOrAdmin) {
+              const isAdmin = user?.roles?.some((r: string) => r === 'ADMIN');
+              if (isAdmin) {
                 setBranchDropdownOpen(!branchDropdownOpen);
               }
             }}
             style={{ 
-              cursor: user?.roles?.some((r: string) => r === 'OWNER' || r === 'ADMIN') ? 'pointer' : 'default' 
+              cursor: user?.roles?.some((r: string) => r === 'ADMIN') ? 'pointer' : 'default' 
             }}
           >
             <Store size={16} />
             <span>{activeOutlet.name}</span>
-            {user?.roles?.some((r: string) => r === 'OWNER' || r === 'ADMIN') && <ChevronDown size={14} />}
+            {user?.roles?.some((r: string) => r === 'ADMIN') && <ChevronDown size={14} />}
           </button>
 
           {branchDropdownOpen && (
