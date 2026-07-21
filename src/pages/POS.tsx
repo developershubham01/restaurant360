@@ -598,17 +598,17 @@ export default function POS() {
 
         setOrderSuccess({ orderNumber: createdOrder.orderNumber, total: grandTotal });
 
+        // Print KOT automatically for every saved order
+        handlePrintKot();
+
         if (options.print) {
-          alert(`Order #${createdOrder.orderNumber} saved and receipt sent to printer.`);
+          // Trigger the receipt print script directly
+          handlePrint();
           setCart([]);
           setDiscount(0);
           setCustomerPhone('');
         } else {
           setIsInvoiceOpen(true);
-        }
-
-        if (options.printKot) {
-          handlePrintKot();
         }
       } else {
         setApiError(createResponse.data?.message || 'Order creation failed.');
